@@ -10,6 +10,12 @@ export function middleware(request: NextRequest) {
   const isProtected = protectedPaths.some((path) => pathname.startsWith(path));
   const isAuthPage = authPaths.some((path) => pathname.startsWith(path));
 
+  // Bare "/" (still the untouched create-next-app starter page) should never render -
+  // send people straight to wherever they actually belong.
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL(token ? '/home' : '/login', request.url));
+  }
+
   if (isProtected && !token) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
@@ -22,5 +28,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/create-story/:path*','/home/:path*', '/create/:path*', '/explore/:path*', '/notifications/:path*', '/profile/:path*', '/chat/:path*', '/login', '/signup'],
+  matcher: ['/', '/create-story/:path*','/home/:path*', '/create/:path*', '/explore/:path*', '/notifications/:path*', '/profile/:path*', '/chat/:path*', '/login', '/signup'],
 };
