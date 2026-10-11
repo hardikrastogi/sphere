@@ -1,0 +1,14 @@
+---
+description: Require a Markdown change record after every project update
+alwaysApply: true
+---
+
+# Change Documentation
+
+- After making any code, configuration, styling, schema, or documentation change, create or update a Markdown record in `docs/changes/`.
+- Name new records `YYYY-MM-DD-short-description.md`.
+- Include the requested behavior, files changed, implementation details, and verification performed.
+- Include the actual code added or modified in fenced code blocks, followed by a plain-language explanation.
+- When a complete function or component is too large, show the relevant changed section or a concise before/after diff instead.
+- Keep the record synchronized if the implementation changes again during the same task.
+- Provide a clickable link to the change record in the final response.
