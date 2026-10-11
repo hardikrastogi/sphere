@@ -25,7 +25,8 @@ function extractTokenFromCookie(cookieHeader: string | undefined): string | null
 }
 
 @WebSocketGateway({
-  cors: { origin: process.env.CLIENT_URL ?? 'http://localhost:3000', credentials: true },
+  // .trim() guards against a stray trailing newline/space in the dashboard-set env var.
+  cors: { origin: process.env.CLIENT_URL?.trim() || 'http://localhost:3000', credentials: true },
 })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()

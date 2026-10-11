@@ -54,6 +54,7 @@ export class AuthController {
   async googleAuthCallback(@Req() req: any, @Res() res: Response) {
     const { access_token } = await this.authService.googleLogin(req.user);
     this.setAuthCookie(res, access_token);
-    res.redirect(`${process.env.CLIENT_URL ?? 'http://localhost:3000'}/home`); // no token in the URL anymore
+    const clientUrl = process.env.CLIENT_URL?.trim() || 'http://localhost:3000';
+    res.redirect(`${clientUrl}/home`); // no token in the URL anymore
   }
 }
