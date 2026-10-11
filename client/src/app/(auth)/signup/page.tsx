@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { LogoMark } from '@/components/logo';
 import { API_URL } from '@/lib/config';
+import { useRedirectIfAuthed } from '@/hooks/useRedirectIfAuthed';
 import Link from 'next/link';
 
 const signupSchema = z.object({
@@ -21,6 +22,7 @@ const signupSchema = z.object({
 type SignupForm = z.infer<typeof signupSchema>;
 
 export default function SignupPage() {
+  useRedirectIfAuthed();
   const router = useRouter();
   const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<SignupForm>({
